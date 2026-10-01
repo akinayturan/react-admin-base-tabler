@@ -1,0 +1,49 @@
+{
+  "name": "react-admin-base-tabler",
+  "version": "0.1.0",
+  "description": "Tabler theme adapter for react-admin-base applications",
+  "repository": { "type": "git", "url": "git+https://github.com/akinayturan/react-admin-base-tabler.git" },
+  "homepage": "https://github.com/akinayturan/react-admin-base-tabler#readme",
+  "bugs": { "url": "https://github.com/akinayturan/react-admin-base-tabler/issues" },
+  "publishConfig": { "access": "public", "registry": "https://registry.npmjs.org/" },
+  "type": "module",
+  "main": "lib/esm/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
+  "files": [
+    "assets",
+    "lib",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_LICENSES.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepack": "npm run build",
+    "watch": "tsc --watch"
+  },
+  "peerDependencies": {
+    "react": ">=19.0.0 <20",
+    "react-admin-base": ">=0.9.0 <0.11",
+    "react-admin-base-bootstrap": ">=0.9.0 <0.11",
+    "react-intl": ">=7.0.0 <11",
+    "react-router": ">=7.0.0 <8"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@tabler/core": "^1.6.1",
+    "bootstrap-icons": "^1.13.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "react": "19.3.0",
+    "react-admin-base": "0.10.5",
+    "react-admin-base-bootstrap": "0.10.6",
+    "react-dom": "19.3.0",
+    "react-intl": "10.1.0",
+    "react-router": "7.18.4",
+    "typescript": "^5.9.3"
+  },
+  "license": "MIT"
+}

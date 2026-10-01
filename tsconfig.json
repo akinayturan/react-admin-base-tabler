@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "lib/esm",
+    "module": "esnext",
+    "target": "es2020",
+    "lib": ["dom", "esnext.intl", "es2020"],
+    "jsx": "react",
+    "declaration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}

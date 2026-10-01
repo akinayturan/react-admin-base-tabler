@@ -1,0 +1,56 @@
+name: Build and publish npm package
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: https://registry.npmjs.org
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm pack --dry-run
+      - name: Check publishing configuration
+        id: auth
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TRUSTED: ${{ vars.NPM_TRUSTED_PUBLISHING }}
+        run: |
+          if [ -n "$NPM_TOKEN" ] || [ "$TRUSTED" = "true" ]; then
+            echo 'ready=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'ready=false' >> "$GITHUB_OUTPUT"
+            echo 'Build passed. Configure NPM_TOKEN or npm Trusted Publishing to enable publication.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Publish a new version
+        if: steps.auth.outputs.ready == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          npm view "$NAME@$VERSION" version --json > published.json 2> registry-error.log && FOUND=true || FOUND=false
+          if [ "$FOUND" = "true" ]; then
+            echo "$NAME@$VERSION is already published; skipping." >> "$GITHUB_STEP_SUMMARY"
+          elif grep -q 'E404' registry-error.log; then
+            npm publish --access public --provenance
+          else
+            cat registry-error.log
+            exit 1
+          fi
