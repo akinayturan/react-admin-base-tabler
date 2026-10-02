@@ -4,7 +4,8 @@ import GlobalMenuStateProvider from "../Providers/GlobalMenuStateProvider.js";
 import Themes from "../Themes.js";
 
 export function MainLayout({ children, showProgressBar = true }: { children: React.ReactNode; showProgressBar?: boolean }) {
-  const [header, sidebar, content, footer] = React.Children.toArray(children);
+  // Preserve empty slots in the shared header/sidebar/content/footer contract.
+  const [header, sidebar, content, footer] = Array.isArray(children) ? children : [children];
 
   return (
     <GlobalMenuStateProvider>

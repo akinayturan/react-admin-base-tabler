@@ -1,5 +1,6 @@
-import React, { createContext, useContext } from "react";
-import { useMenuState } from "react-admin-base-bootstrap";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useIsMobile } from "react-admin-base-bootstrap";
+import { useLocation } from "react-router";
 
 type MenuState = [boolean, () => void];
 
@@ -16,7 +17,18 @@ export function useGlobalMenuState(): MenuState {
 }
 
 export default function GlobalMenuStateProvider({ children }: { children: React.ReactNode }) {
-  const state = useMenuState() as MenuState;
+  const isMobile = useIsMobile();
+  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(!isMobile);
+
+  useEffect(() => {
+    if (isMobile) {
+      setMenuOpen(false);
+    }
+  }, [isMobile, pathname]);
+
+  const toggleMenu = () => setMenuOpen((open) => !open);
+  const state: MenuState = [menuOpen, toggleMenu];
 
   return <MenuStateContext.Provider value={state}>{children}</MenuStateContext.Provider>;
 }

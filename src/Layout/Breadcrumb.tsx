@@ -36,7 +36,7 @@ export default function Breadcrumb({
           <div className="col-auto ms-auto">
             <ol className="breadcrumb breadcrumb-arrows mb-0" aria-label="breadcrumbs">
               <li className="breadcrumb-item">
-                <Link to="/dashboard" aria-label="Dashboard">
+                <Link to="/" aria-label="Home">
                   <Icon name="bi bi-house-door" size={16} />
                 </Link>
               </li>
