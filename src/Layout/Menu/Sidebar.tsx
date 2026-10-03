@@ -39,7 +39,6 @@ export function Logo() {
       </span>
       <span className="rab-tabler-brand-copy">
         <strong>{app.name}</strong>
-        <small className="text-secondary">Control center</small>
       </span>
     </Link>
   );
