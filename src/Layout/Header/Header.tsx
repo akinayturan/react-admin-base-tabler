@@ -11,7 +11,7 @@ export default function Header({ children }: { children?: React.ReactNode }) {
         <div className="d-flex align-items-center gap-2">
           <Toggler />
           <div className="rab-tabler-mobile-title">
-            <span className="rab-tabler-brand-mark" aria-hidden="true">
+            <span className="avatar rab-tabler-brand-mark" aria-hidden="true">
               {(app.name || "A").slice(0, 1).toUpperCase()}
             </span>
             <span className="fw-semibold">{app.name}</span>

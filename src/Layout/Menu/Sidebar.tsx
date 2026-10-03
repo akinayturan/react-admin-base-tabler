@@ -29,8 +29,8 @@ export function Logo() {
   const app = useApp();
 
   return (
-    <Link to="/" className="rab-tabler-brand text-decoration-none">
-      <span className="rab-tabler-brand-mark" aria-hidden="true">
+    <Link to="/" className="navbar-brand rab-tabler-brand">
+      <span className="avatar rab-tabler-brand-mark" aria-hidden="true">
         {app.onlylogo || app.logo ? (
           <img src={app.onlylogo || app.logo} alt="" />
         ) : (
@@ -39,7 +39,7 @@ export function Logo() {
       </span>
       <span className="rab-tabler-brand-copy">
         <strong>{app.name}</strong>
-        <small>Control center</small>
+        <small className="text-secondary">Control center</small>
       </span>
     </Link>
   );
@@ -73,14 +73,14 @@ export default function Sidebar({ children }: { children?: React.ReactNode }) {
     <>
       <aside
         id="rab-tabler-sidebar"
-        className={`rab-tabler-sidebar ${menuOpen ? "is-open" : "is-collapsed"}`}
+        className={`navbar navbar-vertical navbar-expand-lg rab-tabler-sidebar ${menuOpen ? "is-open" : "is-collapsed"}`}
       >
         <div className="rab-tabler-sidebar-header">
           <Logo />
           <button
             type="button"
             onClick={toggleMenu}
-            className="btn btn-icon btn-ghost-light rab-tabler-sidebar-toggle"
+            className="btn btn-icon btn-ghost-secondary rab-tabler-sidebar-toggle"
             aria-label="Collapse navigation"
           >
             <Icon name={menuOpen ? "bi bi-layout-sidebar-inset-reverse" : "bi bi-layout-sidebar-inset"} />
@@ -89,28 +89,28 @@ export default function Sidebar({ children }: { children?: React.ReactNode }) {
 
         <div className="rab-tabler-sidebar-scroll">
           <nav aria-label="Main navigation">
-            <ul className="rab-tabler-nav">{children}</ul>
+            <ul className="navbar-nav rab-tabler-nav">{children}</ul>
           </nav>
         </div>
 
-        <div className="rab-tabler-sidebar-footer">
-          <span className="rab-tabler-status-dot" />
+        <div className="navbar-footer text-secondary rab-tabler-sidebar-footer">
+          <span className="status-dot status-dot-animated bg-success" />
           <span className="rab-tabler-sidebar-label">All systems operational</span>
         </div>
       </aside>
-      {menuOpen && <button className="rab-tabler-backdrop" onClick={toggleMenu} aria-label="Close navigation" />}
+      {menuOpen && <button className="modal-backdrop fade show rab-tabler-backdrop" onClick={toggleMenu} aria-label="Close navigation" />}
     </>
   );
 }
 
 export function MenuGroup({ title, icon, children }: { title: React.ReactNode; icon?: string; children?: React.ReactNode }) {
   return (
-    <li className="rab-tabler-menu-group">
-      <div className="rab-tabler-group-label">
+    <li className="nav-item rab-tabler-menu-group">
+      <div className="nav-section-title rab-tabler-group-label">
         {icon && <Icon name={icon} size={15} />}
         <span className="rab-tabler-sidebar-label">{title}</span>
       </div>
-      <ul>{children}</ul>
+      <ul className="navbar-nav">{children}</ul>
     </li>
   );
 }
@@ -142,22 +142,22 @@ export function Menu({ icon, to, title, subtitle, children, defaultOpen, target 
   );
 
   return (
-    <li className={`rab-tabler-menu-item ${active ? "is-active" : ""}`}>
+    <li className={`nav-item rab-tabler-menu-item ${active ? "active" : ""}`}>
       <AutoLink
         to={to || ""}
         target={target}
         onClick={toggleMenu}
-        className="rab-tabler-menu-link"
+        className="nav-link rab-tabler-menu-link"
         aria-expanded={children ? isOpen : undefined}
       >
-        <span className="rab-tabler-menu-icon"><Icon name={icon || "bi bi-circle"} /></span>
-        <span className="rab-tabler-menu-copy rab-tabler-sidebar-label">
+        <span className="nav-link-icon"><Icon name={icon || "bi bi-circle"} /></span>
+        <span className="nav-link-title rab-tabler-menu-copy rab-tabler-sidebar-label">
           <span>{title}</span>
-          {subtitle && <small>{subtitle}</small>}
+          {subtitle && <small className="text-secondary">{subtitle}</small>}
         </span>
         {children && <Icon name={`bi bi-chevron-${isOpen ? "up" : "down"}`} size={14} className="rab-tabler-menu-chevron rab-tabler-sidebar-label" />}
       </AutoLink>
-      {children && isOpen && <ul className="rab-tabler-submenu">{children}</ul>}
+      {children && isOpen && <ul className="navbar-nav rab-tabler-submenu">{children}</ul>}
     </li>
   );
 }

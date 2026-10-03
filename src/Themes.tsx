@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DefaultValidatorOptions, ThemeProvider } from "react-admin-base-bootstrap";
 import "@tabler/core/dist/css/tabler.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -12,7 +12,6 @@ const themes = {
       default: {
         use() {
           document.documentElement.setAttribute("data-bs-theme", "light");
-          document.documentElement.setAttribute("data-bs-theme-base", "slate");
         },
         unuse() {},
       },
@@ -24,7 +23,6 @@ const themes = {
       default: {
         use() {
           document.documentElement.setAttribute("data-bs-theme", "dark");
-          document.documentElement.setAttribute("data-bs-theme-base", "slate");
         },
         unuse() {},
       },
@@ -33,9 +31,17 @@ const themes = {
 };
 
 export default function Themes({ children }: { children: React.ReactNode }) {
+  const [defaultTheme] = useState(() => {
+    if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    return "light";
+  });
+
   return (
     <DefaultValidatorOptions>
-      <ThemeProvider defaultTheme="light" themes={themes}>
+      <ThemeProvider defaultTheme={defaultTheme} themes={themes}>
         {children}
       </ThemeProvider>
     </DefaultValidatorOptions>
