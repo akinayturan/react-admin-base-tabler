@@ -1,9 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { createContext, useCallback, useContext, useState } from "react";
 import { AutoLink, useApp } from "react-admin-base";
 import { useTheme } from "react-admin-base-bootstrap";
 import { Link, useMatch } from "react-router";
 import { useGlobalMenuState } from "../../Providers/GlobalMenuStateProvider.js";
 import Icon from "../../Icon.js";
+
+const MenuDepthContext = createContext(0);
 
 export function ThemeSwitcherButton() {
   const [theme, setTheme] = useTheme();
@@ -86,7 +88,7 @@ export default function Sidebar({ children }: { children?: React.ReactNode }) {
           </button>
         </div>
 
-        <div className="rab-tabler-sidebar-scroll">
+        <div className="navbar-collapse rab-tabler-sidebar-scroll">
           <nav aria-label="Main navigation">
             <ul className="navbar-nav rab-tabler-nav">{children}</ul>
           </nav>
@@ -106,10 +108,10 @@ export function MenuGroup({ title, icon, children }: { title: React.ReactNode; i
   return (
     <li className="nav-item rab-tabler-menu-group">
       <div className="nav-section-title rab-tabler-group-label">
-        {icon && <Icon name={icon} size={15} />}
+        {icon && <Icon name={icon} size={15} className="rab-tabler-group-icon" />}
         <span className="rab-tabler-sidebar-label">{title}</span>
       </div>
-      <ul className="navbar-nav">{children}</ul>
+      <ul className="navbar-nav rab-tabler-group-items">{children}</ul>
     </li>
   );
 }
@@ -125,6 +127,7 @@ type MenuProps = {
 };
 
 export function Menu({ icon, to, title, subtitle, children, defaultOpen, target }: MenuProps) {
+  const depth = useContext(MenuDepthContext);
   const external = /^(?:https?:|mailto:|tel:)/.test(to || "");
   const match = useMatch(external ? "/__external_link__" : to || "/__empty_link__");
   const [isOpen, setIsOpen] = useState(Boolean(defaultOpen || match));
@@ -146,7 +149,8 @@ export function Menu({ icon, to, title, subtitle, children, defaultOpen, target 
         to={to || ""}
         target={target}
         onClick={toggleMenu}
-        className="nav-link rab-tabler-menu-link"
+        className={`${depth ? "dropdown-item" : "nav-link"} rab-tabler-menu-link ${active ? "active" : ""}`}
+        aria-current={active ? "page" : undefined}
         aria-expanded={children ? isOpen : undefined}
       >
         <span className="nav-link-icon"><Icon name={icon || "bi bi-circle"} /></span>
@@ -156,7 +160,11 @@ export function Menu({ icon, to, title, subtitle, children, defaultOpen, target 
         </span>
         {children && <Icon name={`bi bi-chevron-${isOpen ? "up" : "down"}`} size={14} className="rab-tabler-menu-chevron rab-tabler-sidebar-label" />}
       </AutoLink>
-      {children && isOpen && <ul className="navbar-nav rab-tabler-submenu">{children}</ul>}
+      {children && isOpen && (
+        <MenuDepthContext.Provider value={depth + 1}>
+          <ul className="dropdown-menu show rab-tabler-submenu">{children}</ul>
+        </MenuDepthContext.Provider>
+      )}
     </li>
   );
 }

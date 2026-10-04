@@ -82,6 +82,8 @@
 }
 
 .rab-tabler-sidebar-scroll {
+  display: block !important;
+  flex-basis: auto !important;
   min-height: 0;
   flex: 1;
   overflow-x: hidden;
@@ -105,8 +107,24 @@
   flex-direction: column;
 }
 
+.rab-tabler-sidebar:not(.is-collapsed) .rab-tabler-group-icon {
+  display: none;
+}
+
+.rab-tabler-menu-group + .rab-tabler-menu-group {
+  margin-top: var(--tblr-sidebar-section-title-margin-top, 1rem);
+}
+
+.navbar.rab-tabler-sidebar .rab-tabler-group-items {
+  padding-inline: 0;
+}
+
 .rab-tabler-submenu {
-  padding-inline-start: var(--tblr-sidebar-nav-indent) !important;
+  list-style: none;
+}
+
+.rab-tabler-menu-chevron {
+  margin-inline-start: auto;
 }
 
 .rab-tabler-sidebar-footer {

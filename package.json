@@ -1,6 +1,6 @@
 {
   "name": "react-admin-base-tabler",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Tabler theme adapter for react-admin-base applications",
   "repository": { "type": "git", "url": "git+https://github.com/akinayturan/react-admin-base-tabler.git" },
   "homepage": "https://github.com/akinayturan/react-admin-base-tabler#readme",
