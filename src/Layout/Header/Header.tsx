@@ -12,7 +12,11 @@ export default function Header({ children }: { children?: React.ReactNode }) {
           <Toggler />
           <div className="rab-tabler-mobile-title">
             <span className="avatar rab-tabler-brand-mark" aria-hidden="true">
-              {(app.name || "A").slice(0, 1).toUpperCase()}
+              {app.onlylogo || app.logo ? (
+                <img src={app.onlylogo || app.logo} alt="" />
+              ) : (
+                (app.name || "A").slice(0, 1).toUpperCase()
+              )}
             </span>
             <span className="fw-semibold">{app.name}</span>
           </div>
