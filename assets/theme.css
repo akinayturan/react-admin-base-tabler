@@ -33,6 +33,22 @@
   color: var(--tblr-body-color) !important;
 }
 
+/* CKEditor's light UI is also a light content canvas, even in a dark form.
+   Set inherited colors rather than overriding authored rich-text colors. */
+[data-bs-theme="dark"] .ck.ck-editor {
+  color-scheme: light;
+  --tblr-body-color: var(--tblr-gray-900, #182433);
+  --tblr-heading-color: inherit;
+  --tblr-emphasis-color: var(--tblr-gray-900, #182433);
+  color: var(--tblr-body-color);
+}
+
+[data-bs-theme="dark"] .ck.ck-editor .ck-editor__editable.ck-content {
+  background-color: var(--ck-color-base-background, #fff);
+  color: var(--tblr-body-color);
+  caret-color: var(--tblr-body-color);
+}
+
 /* ApiSelect/react-select does not inherit native Tabler form colors. */
 [data-bs-theme="dark"] .react-select-container .react-select__control {
   background-color: var(--tblr-bg-forms);
