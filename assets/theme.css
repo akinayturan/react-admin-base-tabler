@@ -22,6 +22,41 @@
   padding-block: 1.5rem;
 }
 
+/* BootstrapDataTable uses a Bootstrap grid inside Tabler's flex card header. */
+.rab-tabler-shell .card-header > .row:has(> .col-md-2 > select) {
+  flex: 1 1 auto;
+  width: calc(100% + var(--tblr-gutter-x, 1.5rem));
+  min-width: 0;
+  align-items: center;
+  row-gap: 0.75rem;
+}
+
+.rab-tabler-shell .card-header > .row:has(> .col-md-2 > select) > .btn.w-100 {
+  flex: 1 1 auto;
+  width: auto !important;
+  min-width: 2.5rem;
+}
+
+/* Keep view/edit/duplicate/delete actions on a single line, even in wide tables. */
+.rab-tabler-shell .dataTable th.min,
+.rab-tabler-shell .dataTable td.min {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.rab-tabler-shell .dataTable td.min > a,
+.rab-tabler-shell .dataTable td.min > .btn {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+@media (max-width: 767.98px) {
+  .rab-tabler-shell .card-header > .row:has(> .col-md-2 > select) > .btn.w-100 {
+    flex: 1 1 100%;
+    width: 100% !important;
+  }
+}
+
 .navbar.rab-tabler-sidebar {
   position: sticky;
   inset: auto;
