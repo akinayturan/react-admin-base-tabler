@@ -300,63 +300,58 @@
 
 .rab-tabler-auth {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(28rem, 1fr);
+  min-height: 100dvh;
 }
 
-.rab-tabler-auth.without-banner {
-  grid-template-columns: 1fr;
-}
-
-.rab-tabler-auth-visual {
-  min-height: 100vh;
-  padding: clamp(2rem, 5vw, 5rem);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.rab-tabler-auth-brand,
 .rab-tabler-auth-card-header {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.75rem;
-}
-
-.rab-tabler-auth-message {
-  max-width: 36rem;
-}
-
-.rab-tabler-auth-message h1 {
-  margin-block: 1rem;
 }
 
 .rab-tabler-auth-panel {
   min-height: 100vh;
-  padding: 2rem;
+  min-height: 100dvh;
+  padding: 5rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.rab-tabler-auth-card,
-.rab-tabler-language {
+.rab-tabler-auth-card {
   width: min(100%, 27rem);
+}
+
+.rab-tabler-auth-card {
+  flex: 0 0 auto;
+}
+
+.rab-tabler-auth-logo {
+  max-width: min(9rem, 50%);
+  height: 4.5rem;
+  object-fit: contain;
 }
 
 .rab-tabler-auth-card-header {
   margin-bottom: 2rem;
 }
 
-.rab-tabler-auth-card-header > div {
+.rab-tabler-auth-controls {
+  position: fixed;
+  inset-inline: 1rem;
+  bottom: 1rem;
+  z-index: 1030;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .rab-tabler-language {
-  margin-top: 1rem;
-  text-align: center;
+  min-width: 0;
 }
 
 .rab-tabler-backdrop {
@@ -389,16 +384,8 @@
 }
 
 @media (max-width: 767.98px) {
-  .rab-tabler-auth {
-    display: block;
-  }
-
-  .rab-tabler-auth-visual {
-    display: none;
-  }
-
   .rab-tabler-auth-panel {
-    padding: 1rem;
+    padding: 5rem 1rem;
   }
 
   .rab-tabler-page-header .col-auto {

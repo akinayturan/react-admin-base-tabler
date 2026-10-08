@@ -30,7 +30,6 @@ export default function Breadcrumb({
       <div className="page-header d-print-none rab-tabler-page-header">
         <div className="row align-items-center g-3">
           <div className="col">
-            <div className="page-pretitle">Workspace</div>
             {resolvedTitle && <h1 className="page-title">{resolvedTitle}</h1>}
           </div>
           <div className="col-auto ms-auto">
