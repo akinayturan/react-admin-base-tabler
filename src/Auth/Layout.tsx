@@ -24,10 +24,10 @@ export default function Layout({ children }: { big?: boolean; children?: React.R
               {!logo && <strong>{app.name}</strong>}
             </div>
             {children}
-          </div>
-          <div className="rab-tabler-auth-controls">
-            <div className="rab-tabler-language"><LanguageSwitcher /></div>
-            <ThemeSwitcherButton />
+            <div className="rab-tabler-auth-controls">
+              <div className="rab-tabler-language"><LanguageSwitcher /></div>
+              <ThemeSwitcherButton />
+            </div>
           </div>
         </section>
       </div>
